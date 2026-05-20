@@ -1,4 +1,5 @@
 import { brandCss } from './brand-css.js';
+import { coolifyLogoSvg } from './coolify-logo.js';
 
 // Cloudflare Worker koji sjedi ispred app.domovina.link (Coolify dashboard)
 // i u letu prilagođava HTML odgovor DOMOVINA brand-u:
@@ -25,6 +26,20 @@ const themeSeedScript = `
 
 export default {
   async fetch(request) {
+    const url = new URL(request.url);
+
+    // Presretni Coolify default logo i serviraj DOMOVINA Cloud logotip.
+    // Putanja je hardkodirana u Coolify HTML-u (<link rel="icon" href="/coolify-logo.svg">),
+    // pa odgovaramo direktno bez forwardanja na origin.
+    if (url.pathname === '/coolify-logo.svg') {
+      return new Response(coolifyLogoSvg, {
+        headers: {
+          'content-type': 'image/svg+xml; charset=utf-8',
+          'cache-control': 'public, max-age=3600',
+        },
+      });
+    }
+
     const response = await fetch(request);
     const contentType = response.headers.get('content-type') || '';
 

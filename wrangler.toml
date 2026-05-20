@@ -1,0 +1,10 @@
+name = "app-domovina-link-brand"
+main = "src/index.js"
+compatibility_date = "2025-05-01"
+workers_dev = false
+
+# Worker presretne sve requestove na app.domovina.link i injecta brand CSS
+# u HTML responsove. Zona "domovina.link" mora postojati u Cloudflare accountu.
+routes = [
+  { pattern = "app.domovina.link/*", zone_name = "domovina.link" }
+]

@@ -49,6 +49,15 @@ export default {
           );
         },
       })
+      .on('body', {
+        element(el) {
+          // DOMOVINA brand stripe — fixed na vrhu, vidi .domovina-brand-stripe u brand-css.js
+          el.prepend(
+            '<div class="domovina-brand-stripe" aria-hidden="true"><span></span><span></span><span></span></div>',
+            { html: true }
+          );
+        },
+      })
       .transform(response);
   },
 };

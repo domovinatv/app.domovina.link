@@ -27,4 +27,29 @@ html:not(.dark) body {
 a:hover {
   --color-coollabs: #FF0000;
 }
+
+/* DOMOVINA brand stripe — fixed na vrhu cijelog UI-a, iznad svega.
+   Tri jednake trake red -> white -> navy, 6px visine.
+   Pattern preuzet iz donate.domovina.ai/public/styles.css. */
+.domovina-brand-stripe {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  display: flex;
+  z-index: 999999;
+  pointer-events: none;
+}
+.domovina-brand-stripe span {
+  flex: 1;
+  display: block;
+}
+.domovina-brand-stripe span:nth-child(1) { background: #FF0000; }
+.domovina-brand-stripe span:nth-child(2) { background: #FFFFFF; }
+.domovina-brand-stripe span:nth-child(3) { background: #002F6C; }
+
+/* Pomak za sadržaj da se ne skriva ispod stripe-a. Coolify-ev top toolbar
+   će biti pomaknut 6px niže — neprimjetno. */
+body { margin-top: 6px; }
 `;
